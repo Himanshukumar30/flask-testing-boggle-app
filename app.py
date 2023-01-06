@@ -1,3 +1,24 @@
 from boggle import Boggle
+from flask import Flask, session, render_template, request,jsonify
+app = Flask(__name__)
+
+app.config['SECRET_KEY'] = "l6ts-k66p-1t-s6cr6t"
 
 boggle_game = Boggle()
+
+# Displaying the Board
+@app.route('/')
+def homepage():
+    board = boggle_game.make_board()
+    session['board'] = board
+    high_score = session.get('high_score', 0)
+    num_plays = session.get('num_plays', 0)
+    return render_template('index.html', board=board, high_score = high_score, num_plays=num_plays)
+    
+@app.route('/check-word')
+def check_word():
+    word = request.args["word"]
+    board = session["board"]
+    response = boggle_game.check_valid_word(board, word)
+
+    return jsonify({'result': response})

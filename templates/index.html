@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/app.css" />
+    <title>Boggle App</title>
+  </head>
+  <body>
+    <header>Boggle App!</header>
+    <section class="app">
+      <table id="board">
+        <tbody>
+          {%for row in board %}
+          <tr>
+            {% for cell in row %}
+            <td>{{cell}}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <p>High Score: <b>{{high_score}}</b> acheived in {{num_plays}} plays</p>
+
+      <form method="POST" class="guess-word">
+        <input name="word" class="word" />
+        <button>Submit</button>
+      </form>
+    </section>
+
+    <p>Score: <b class="score">0</b> Seconds Left: <b class="timer"></b></p>
+
+    <p class="msg"></p>
+
+    <ul class="words"></ul>
+    <script src="static/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+</html>
