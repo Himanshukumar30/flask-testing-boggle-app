@@ -1,11 +1,17 @@
-class boggleApp {
-  constructor(boardId) {
+let game = new BoggleApp("boggle", 60);
+
+class BoggleApp {
+  constructor(boardId, secs = 60) {
     this.word = word;
     this.score = 0;
     this.words = new Set();
     this.board = $("#" + boardId);
 
-    $(".word").on("submit", this.handleSubmit(this));
+    this.secs = secs; // game length
+    this.showTimer();
+    this.timer = setInterval(this.tick.bind(this), 1000);
+
+    $(".guess-word", this.board).on("submit", this.handleSubmit.bind(this));
   }
 
   //   Handle form submit
@@ -40,5 +46,43 @@ class boggleApp {
   //   Display status message
   showMessage(msg, cls) {
     $(".msg", this.board).text(msg).removeClass().addClass(`msg ${cls}`);
+  }
+
+  showWord(word) {
+    $(".words", this.board).append($("<li>", { text: word }));
+  }
+
+  /* show score in html */
+
+  showScore() {
+    $(".score", this.board).text(this.score);
+  }
+
+  async scoreGame() {
+    $(".guess-word", this.board).hide();
+    const resp = await axios.post("/post-score", { score: this.score });
+    if (resp.data.brokeRecord) {
+      this.showMessage(`New record: ${this.score}`, "ok");
+    } else {
+      this.showMessage(`Final score: ${this.score}`, "ok");
+    }
+  }
+
+  /* Update timer in DOM */
+
+  showTimer() {
+    $(".timer", this.board).text(this.secs);
+  }
+
+  /* Tick: handle a second passing in game */
+
+  async tick() {
+    this.secs -= 1;
+    this.showTimer();
+
+    if (this.secs === 0) {
+      clearInterval(this.timer);
+      await this.scoreGame();
+    }
   }
 }

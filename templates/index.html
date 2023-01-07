@@ -24,19 +24,20 @@
 
       <p>High Score: <b>{{high_score}}</b> acheived in {{num_plays}} plays</p>
 
+      <p>Score: <b class="score">0</b> Seconds Left: <b class="timer"></b></p>
+
       <form method="POST" class="guess-word">
         <input name="word" class="word" />
         <button>Submit</button>
       </form>
+
+      <p class="msg"></p>
+
+      <ul class="words"></ul>
     </section>
 
-    <p>Score: <b class="score">0</b> Seconds Left: <b class="timer"></b></p>
-
-    <p class="msg"></p>
-
-    <ul class="words"></ul>
-    <script src="static/app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="static/app.js"></script>
   </body>
 </html>
