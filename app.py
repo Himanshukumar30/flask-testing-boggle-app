@@ -15,9 +15,11 @@ def homepage():
     num_plays = session.get('num_plays', 0)
     return render_template('index.html', board=board, high_score = high_score, num_plays=num_plays)
     
-@app.route('/check-word')
+@app.route('/check-word', methods=['POST'])
 def check_word():
-    word = request.args["word"]
+    print(request.form)
+    word = request.form["word"]
+    print(word)
     board = session["board"]
     response = boggle_game.check_valid_word(board, word)
     return jsonify({'result': response})

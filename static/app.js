@@ -1,5 +1,3 @@
-let game = new BoggleApp("boggle", 60);
-
 class BoggleApp {
   constructor(boardId, secs = 60) {
     this.word = word;
