@@ -26,7 +26,7 @@
 
       <p>Score: <b class="score">0</b> Seconds Left: <b class="timer"></b></p>
 
-      <form method="POST" action="/check-word" class="guess-word">
+      <form method="POST" class="guess-word">
         <input name="word" class="word" />
         <button>Submit</button>
       </form>
@@ -39,8 +39,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="static/app.js"></script>
-    <script>
-      let game = new BoggleApp("boggle", 60);
-    </script>
   </body>
 </html>

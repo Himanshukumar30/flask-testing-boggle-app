@@ -1,3 +1,5 @@
+"""Utilities related to Boggle game."""
+
 from random import choice
 import string
 
